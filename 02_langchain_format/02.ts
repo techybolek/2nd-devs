@@ -22,7 +22,7 @@ const chatPrompt = ChatPromptTemplate.fromMessages([
 
 // Faktyczne uzupełnienie szablonów wartościami
 const formattedChatPrompt = await chatPrompt.formatMessages({
-    context,
+    context: context,
     role: "Senior JavaScript Programmer",
     text: "What is Vercel AI?",
 });

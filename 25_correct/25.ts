@@ -14,6 +14,8 @@ const documents = doc.pageContent.split("\n\n").map((content) => {
     })
 });
 
+console.log('Documents:', documents)
+
 const model = new ChatOpenAI({ modelName: "gpt-4", maxConcurrency: 5});
 const copywriterPromise = [];
 

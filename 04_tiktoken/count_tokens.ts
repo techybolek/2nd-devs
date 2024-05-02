@@ -23,8 +23,10 @@ export const countTokens = (messages: Message[], model="gpt-3.5-turbo-0613"): nu
     }
     let num_tokens = 0;
     for (let message of messages) {
+        console.log('message:', message, 'tokens per message:', tokens_per_message)
         num_tokens += tokens_per_message;
         for (let [key, value] of Object.entries(message)) {
+            console.log('key:', key, 'value:',value)
             num_tokens += encoding.encode(value).length;
             if (key === "name") {
                 num_tokens += tokens_per_name;
@@ -32,5 +34,6 @@ export const countTokens = (messages: Message[], model="gpt-3.5-turbo-0613"): nu
         }
     }
     num_tokens += 3;
+    console.log('Returning:', num_tokens)
     return num_tokens;
 }

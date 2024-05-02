@@ -14,9 +14,12 @@ const $ = cheerio.load(html.pageContent);
 const authors = $("#instructors").html() ?? '';
 // Convert HTML to markdown
 const markdown = NodeHtmlMarkdown.translate(authors);
+console.log('############################ Authors:', authors)
+console.log('############################ Markdown:', markdown)
 // Split markdown into chunks
 const chunks = markdown.split(/(?!^)(?=\!\[\]\(.*\)\n\n\[.*\]\(.*\)\n\n###)/g);
 
+console.log('CHUNKS:', chunks, chunks.length)
 let docs: Document<IDocMetadata>[] = chunks.map(chunk => {
     // Get author name
     const author = chunk.match(/### (.*(?:\n.*)?) /)?.[1];

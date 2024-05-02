@@ -10,12 +10,15 @@ const documents = doc.pageContent.split("\n\n").map((content) => {
         pageContent: content,
     })
 });
-const query = "Can you write me a function that will generate random number in range for easy_?";
+console.log('Docs:', documents)
+//const query = "Can you write me a function that will generate random number in range for eduweb?";
+const query = "What's NextJS?"
 const filtered = searchDocs(documents, query.split(' '));
 
 const chat = new ChatOpenAI();
-const { content } = await chat.call([
-    new SystemMessage(`Answer questions as truthfully using the context below and nothing more. If you don't know the answer, say "don't know". 
+const { content } = await chat.invoke([
+    new SystemMessage(`Answer questions as truthfully using the context 
+    below and nothing more. If you don't know the answer, say "don't know". 
     
     context### 
     ${filtered.map((doc) => doc.pageContent).join('\n\n')} 

@@ -19,6 +19,7 @@ let { content: cot } = await chat.invoke([
 ]);
 
 if (typeof cot === 'string' && typeof zeroShot === 'string') {
+    console.log('COT:', cot)
     cot = cot.split("\n###")[1];
     console.log('Zero Shot: ' + parseInt(zeroShot), parseInt(zeroShot) === 2967 ? "Passed" : `Failed 🙁`);
     console.log('Chain of Thought: ' +  parseInt(cot), parseInt(cot) === 2967 ? "Passed" : `Failed 🙁`);

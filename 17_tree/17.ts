@@ -18,9 +18,11 @@ Note:
 Help me decide which path to take by focusing solely on a business context.`;
 
 let conversation = [
-    new SystemMessage(`Act an expert in mental models, critical thinking, and making complex, strategic decisions. Use markdown syntax to format your responses throughout the conversation.`),
+    new SystemMessage(`Act an expert in mental models, critical thinking, and making complex, strategic decisions.
+    Use markdown syntax to format your responses throughout the conversation.`),
     new HumanMessage(
-        `${query}. Can you brainstorm three different possible strategies that I could take to effectively create new content and do this consistently while maintaining my energy, life balance, and overall quality of the content I produce?  Please be concise, yet detailed as possible.`
+        `${query}. Can you brainstorm three different possible strategies that I could take to effectively create new content 
+        and do this consistently while maintaining my energy, life balance, and overall quality of the content I produce?  Please be concise, yet detailed as possible.`
     ),
 ];
 async function chatAndLog(message: string) {
@@ -30,10 +32,20 @@ async function chatAndLog(message: string) {
     return content;
 }
 
-await chatAndLog(`For each solution, evaluate their potential, pros and cons, effort needed, difficulty, challenges and expected outcomes. Assign success rate and confidence level for each option.`);
-await chatAndLog(`Extend each solution by deepening the thought process. Generate different scenarios, strategies of implementation that include external resources and how to overcome potential unexpected obstacles.`);
-await chatAndLog(`For each scenario, generate a list of tasks that need to be done to implement the solution.`);
-await chatAndLog(`Based on the evaluations and scenarios, rank the solutions in order. Justify each ranking and offer a final solution.`);
+console.log('Starting first chatAndLog...')
+let resp = await chatAndLog(`For each solution, evaluate their potential, pros and cons, 
+effort needed, difficulty, challenges and expected outcomes. Assign success rate and confidence level for each option.`);
+console.log('Received:', resp)
+console.log('...Starting second chatAndLog...')
+resp  = await chatAndLog(`Extend each solution by deepening the thought process. Generate different scenarios, strategies of implementation that include external 
+resources and how to overcome potential unexpected obstacles.`);
+console.log('Received:', resp)
+console.log('...Starting third chatAndLog...')
+resp = await chatAndLog(`For each scenario, generate a list of tasks that need to be done to implement the solution.`);
+console.log('Received:', resp)
+console.log('...Starting rourth chatAndLog...')
+resp = await chatAndLog(`Based on the evaluations and scenarios, rank the solutions in order. Justify each ranking and offer a final solution.`);
+console.log('Received:', resp)
 
 const conversationText = `${conversation.map((message) => `## ${message._getType()}:\n\n${message.content}`).join('\n\n')}}`;
 fs.writeFileSync('17_tree/result.md', conversationText);

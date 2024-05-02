@@ -8,14 +8,18 @@ const sources = [
     {name: "Jakub (unknow)", source: "jakub.md"},
     {name: "Mateusz (MC)", source: "mateusz.md"}
 ];
-const { content: source } = await chat.call([
-    new SystemMessage(`Pick one of the following sources related to the query and return filename and nothing else.
+
+const systemMessage = `Pick one of the following sources related to the query and return filename and nothing else.
         Sources###
         ${sources.map(s => s.name + " file:" + s.source).join('\n')}
         ###
         Query: ${query}\n\n
         Source file name:
-    `),
+`
+console.log(systemMessage)
+
+const { content: source } = await chat.invoke([
+    new SystemMessage(systemMessage),
 ]);
 
 console.log(source);

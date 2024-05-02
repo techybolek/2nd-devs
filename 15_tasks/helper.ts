@@ -15,6 +15,7 @@ export const rephrase = async (response: string, query: string) => {
         `),
     ])
 
+    //console.log('Rephrase in action. Original Response:', response, 'query: ', query, 'rephrased response:', content)
     return content;
 }
 

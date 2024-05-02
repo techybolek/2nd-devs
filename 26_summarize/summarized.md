@@ -1,42 +1,30 @@
 # Summary of the document Lekcja kursu AI_Devs, S03L03 — Wyszukiwanie i bazy wektorowe
 
-## Notatka S03L03 — Bazy Wektorowe i Wyszukiwanie 
+Lekcja **S03L03** kursu AI_Devs dotyczyła wyszukiwania i baz wektorowych, które pozwalają przechowywać oraz przeszukiwać dane pochodzące z lmu (długoterminowej pamięcie dla modelu). Dwa główne zastosowania to możliwość hiper-personalizacji doświadczeń, polegające na połączeniu wiedzy o nas z dostępem do usług i urządzeń. Drugi powód to możliwość budowania częściowo autonomicznych zachowań, które przekładają się na unikalne zastosowania, np. wyobraź sobie, że GPT-4 wykonuje zadanie samodzielnie, posiadając zdolność dobrania niezbędnych danych do jego wykonania. 
 
-Tworzenie długotrminowej pamięci dla LLM (Language Model Learning) sprzyja **hiper-personalizacji** doświadczeń oraz tworzeniu **częściowo autonomicznych zachowań**. 
+Bazy wektorowe, o których już rozmawialiśmy w lekcji **C01L02**, to miejsce gdzie przechowujemy i przeszukujemy dane. Możesz zobaczyć uproszczoną wizualizację wielowymiarowych danych, przedstawionych w przestrzeni 3D [tutaj](https://projector.tensorflow.org). Dzięki nim możliwe jest określenie podobieństwa pomiędzy danymi, na przykład, za pomocą metody cosine similarity. Na wykresie poniżej widać, które słowa są najbliżej słowa "komputer".
 
-**Bazy wektorowe** są narzędziem do przechowywania i wyszukiwania danych, które przybierają formę wielowymiarowych wektorów. Dzięki technikom porównywania wektorów, jak np. metoda **cosine similarity**, możliwe jest określenie podobieństwa pomiędzy danymi.
+Budowanie dynamicznego kontekstu dla LLM polega na dodawaniu danych do indeksu bazy wektorowej z uwzględnieniem odpowiednich metadanych, takich jak treść dokumentu, kategorie, tagi, źródło lub  inne dane, które mogą być istotne. Ważne jest również, aby pamiętać o aktualizacji danych, ponieważ przynajmniej część z nich będzie zmieniać się w czasie. Na przykład, generowanie embeddingów kosztuje i zajmuje czas, więc musimy pamiętać o synchronizacji danych między źródłem danych a bazą wektorową.
 
-![Wizualizacja bazy wektorowej](https://cloud.overment.com/word2vec-1695711060.gif)
+Na koniec, wyszukiwanie podobności (similarity search) jest procesem, w którym nasze wielowymiarowe zapytanie jest wzbogacane, modyfikowane i opisane, a następnie zwraca nam listę embeddingów i, zwykle, przypisany do nich score, pokazujący, jak bardzo są one podobne do naszego zapytania. Schemat działania baz wektorowych wygląda podobnie, o czym przekonasz się w dalszych lekcjach. W przykładzie **21_similarity** znajdziesz kod, który realizuje właśnie te schematy, które omówione zostały przez Adama.
 
-![Przykładowe wyniki wyszukiwania](https://cloud.overment.com/cosine-cc650e6b-1.png)
+W S03L03 kursu AI_Devs omawiane są zagadnienia związane z wyszukiwaniem i bazami wektorowymi, konkretnie - przetwarzanie danych dotyczących autorów strony aidevs.pl przedstawione jest jako prawdziwy projekt. Długie pliki HTML czy innego formatu mogą zostać zrozumiane przez model, ale zawierają wiele niepotrzebnego szumu. Możemy usunąć zbędne sekcje przy użyciu narzędzi dostępnych dla kodu HTML, takich jak [cheerio](https://www.npmjs.com/package/cheerio). Często potrzebujemy nie tylko tekstu, ale także formatowania, linków i obrazów, dlatego dobrym podejściem jest konwersja kodu na składnię Markdown, na przykład przy użyciu [node-html-markdown](https://www.npmjs.com/package/node-html-markdown). Dokumenty musimy podzielić na mniejsze fragmenty, opisać za pomocą metadanych i przenieść linki do metadanych, zamiast używać pełnych adresów w treści. GPT-4 może pomagać w pisaniu wyrażeń regularnych, które mogą być użyte do podziału tekstu i znalezienia linków. Poniżej przedstawiam różne zastosowania przetwarzania długich dokumentów, takie jak korekta, tłumaczenie, klasyfikacja, wzbogacanie, kompresja czy interakcja z treścią za pomocą czatbota lub w celu wyszukiwania zewnętrznych informacji. Kolejną sugestią jest wypróbowanie [blueprinta scenariusza](https://cloud.overment.com/aidevs_process_file-1695994995.json), który można łatwo testować na krótkich plikach, zwracając uwagę na koszty przetwarzania długich treści. ![](https://cloud.overment.com/processing-f7af380e-4.png)
 
-Bazy wektorowe są kluczowe dla **budowania dynamicznego kontekstu dla LLM**. Proces dodawania danych do bazy wektorowej opiera się na przygotowaniu odpowiednich dokumentów, wygenerowaniu embeddingu i zapisaniu go w bazie wraz z metadanymi.
+Scenariusz zaczyna się od **webhooka**, który umożliwia wysyłanie plików za pomocą zapytań **HTTP**. Następnie pliki te są dzielone na mniejsze fragmenty, które następnie są przekazywane do **OpenAI** do przetłumaczenia na język angielski. W przypadku błędu, próba jest przeprowadzana ponownie po krótkim czasie. Tłumaczenia są zapisywane na **Google Drive** i udostępniane za pomocą linku do pobrania.
 
-![Diagram procesu dodawania danych](https://cloud.overment.com/store-e4ff3078-b.png)
+Uwaga, scenariusz ten może być uruchomiony na różne sposoby, co czyni go bardzo elastycznym. Może być uruchamiany na żądanie, według harmonogramu, lub w odpowiedzi na jakieś zdarzenie. Dodatkowe informacje kontekstowe mogą również być przesyłane wraz z plikami, zwiększając użyteczność tego narzędzia.
 
-Bezpośrednio w bazach wektorowych wykonuje się wyszukiwanie, czyli **Similarity Search**, na którego podstawie otrzymujemy listę najbardziej zbliżonych semantycznie danych. Działanie jest przedstawione na dolnym schemacie.
+Dla długiego dokumentu, tłumaczenia muszą być dopasowane do kontekstu. Może to obejmować przekazywanie nazwy pliku lub innych informacji, które pomagają w tłumaczeniu. Poniżej znajduje się obrazek z przykładowym interfejsem użytkownika. 
 
-![Wyszukiwanie w bazie wektorowej](https://cloud.overment.com/similarty-1695814767.png)
+![Przykład interfejsu użytkownika](https://cloud.overment.com/prompt-e7738b20-3.png)
 
-Przykładem realizacji takiego procesu może być kod 21_similarity, w którym budowany jest dynamiczny kontekst na podstawie wpisów użytkownika.
+Możesz przetestować tę funkcję za pomocą poniższego CURL'a lub z jakimkolwiek innego rodzaju zapytania HTTP.
 
-![Przykład](https://cloud.overment.com/search-66da96ba-1.png)
+![Test CURL](https://cloud.overment.com/curl-2d752ffc-b.png)
 
-Lekcja S03L03 kursu AI_Devs koncentruje się na wyszukiwaniu i bazach wektorowych. Pokazuje wykorzystanie metody **similaritySearchWithScore**, zależność wyników wyszukiwania od liczby żądanych rekordów (**topK**) oraz możliwość filtrowania wyników na podstawie metadanych. Wysokiej jakości wyszukiwania można dokonać z zastosowaniem **\'*Hybrid Search and Retrieval Augmented Generation*' (HSRAG)**, łącząc różne techniki wyszukiwania. Przykład pokazuje jak rozbita informacja może być niekompletna, jeśli nie uwzględniamy wszystkich relevantnych fragmentów, co w praktyce może prowadzić do utraty precyzji i halucynacji modelu (![](https://cloud.overment.com/miss-12acc7c6-f.png), ![](https://cloud.overment.com/fragmented-500ae0cc-c.png)). 
+Dodatkowo, można zasugerować utworzenie oddzielnego folderu na **Google Drive** (np. 'Do przetłumaczenia'), który będzie obserwowany przez scenariusz.
 
-Lekcja zwraca również uwagę na konieczność pracy z różnymi formatami plików, kładąc nacisk na uniwersalne koncepcje umożliwiające budowanie zestawu danych z różnorodnych źródeł. Podkreśla, jak ważne jest zachowanie jednolitości języka danych i zapytania do bazy. Zilustrowane są dwa przykłady, **11_docs** i **22_simple**, które pokazują jak generować dokumenty i opisywać je z pomocą metadanych i jak wykorzystać prosty vector store do wyszukiwania dokumentów za pomocą similarity search (![](https://cloud.overment.com/simple-2adcdec1-f.png)), oraz przykład **24_files**, który pokazuje pracę z różnymi formatami plików.
+![Przykład drugiego interfejsu użytkownika](https://cloud.overment.com/process-e7445b93-a.png)
 
-W trakcie trzeciej lekcji trzeciego sezonu kursu AI_Devs, uczymy się w jaki sposób przetwarzać pliki HTML na format zrozumiały dla AI. Istotne jest usuwanie szumów, takich jak tagi HTML, style CSS czy skrypty JavaScript, które nie niosą żadnej użytecznej treści. ![html do czyszczenia](https://cloud.overment.com/html-04554502-3.png)
-
-Wykorzystując narzędzie [cheerio](https://www.npmjs.com/package/cheerio), możemy pobrać treść wskazanego tagu - w naszym przykładzie będzie to element div o identyfikatorze **instructors**. ![instruktorzy](https://cloud.overment.com/authors-300c2ea4-c.png)
-
-Po czyszczeniu kodu mamy jeszcze wiele zbędnych elementów. Wykorzystując narzędzie [node-html-markdown](https://www.npmjs.com/package/node-html-markdown), zamieniamy HTML na składnię Markdown, której lepiej rozumieją modele AI. ![kod po konwersji na Markdown](https://cloud.overment.com/markdown-ac61f421-6.png)
-
-Następnie dzielimy tekst na fragmenty, które można opisać metadanymi. Tutaj również znajduje zastosowanie wyrażenie regularne. Widać, jak wygląda podział bez uwzględnienia zdjęć (po lewej) oraz prawidłowy podział tekstu (po prawej), który uwzględnia zdjęcia. ![podział tekstu](https://cloud.overment.com/split-cc2d40ca-5.jpg)
-
-W końcu zamieniamy linki na indeksy, które możemy później wykorzystać jako metadane. ![dokumenty z metadanymi](https://cloud.overment.com/described-17bfed2b-2.png)
-
-To tak przygotowane dokumenty są gotowe do indeksowania w bazie wektorowej i wykorzystania na potrzeby kontekstu dla modelu AI. Porównując te dokumenty z oryginalnymi danymi, zauważamy dużą różnicę, która na pewno wpłynie na efektywność naszego AI. 
-
-Na koniec omówiliśmy różne techniki przetwarzania długich dokumentów, pokazując, jak można zastosować je na przykładzie platformy make.com. ![processing](https://cloud.overment.com/processing-f7af380e-4.png)
+Następnie, czekamy na odpowiedź na podłączony adres webhook. Może to chwilę potrwać.
 

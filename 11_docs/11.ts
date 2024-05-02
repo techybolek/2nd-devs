@@ -11,7 +11,8 @@ const documents = doc.pageContent.split("\n\n").map((content) => {
         pageContent: content,
     })
 });
-console.log(documents);
+console.log('DOCUMENTS:', documents);
+console.log('DOCUMENTS length:', documents.length);
 const model = new ChatOpenAI({maxConcurrency: 5});
 const descriptionPromise = [];
 
@@ -27,6 +28,7 @@ for (const doc of documents) {
     ]));
 }
 const descriptions = await Promise.all(descriptionPromise);
+console.log('DESCRIPTIONS:', descriptions.map(d=>d.content))
 
 descriptions.forEach((description, index) => {
     documents[index].metadata.source = description.content;

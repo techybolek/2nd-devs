@@ -9,7 +9,7 @@ const chat = new ChatOpenAI({
 // Wywołanie chatu wraz z funkcją przyjmującą kolejne tokeny składające się na wypowiedź modelu
 await chat.invoke([
     new HumanMessage(
-        "Hey there!"
+        "Czołem!"
     ),
 ], {
     callbacks: [

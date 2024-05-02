@@ -15,12 +15,14 @@ const indexed = result.collections.find((collection) => collection.name === COLL
 console.log(result);
 // Create collection if not exists
 if (!indexed) {
+    console.log("Collection doesn't exist, creating....")
     await qdrant.createCollection(COLLECTION_NAME, { vectors: { size: 1536, distance: 'Cosine', on_disk: true }});
 }
 
 const collectionInfo = await qdrant.getCollection(COLLECTION_NAME);
 // Index documents if not indexed
 if (!collectionInfo.points_count) {
+    console.log("Collection empty, populating....")
 
     // Read File
     const loader = new TextLoader(MEMORY_PATH);
@@ -73,4 +75,4 @@ const search = await qdrant.search(COLLECTION_NAME, {
     }
 });
 
-console.log(search);
+console.log('Search returned:', search)
