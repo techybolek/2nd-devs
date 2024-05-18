@@ -43,8 +43,8 @@ const { theTask, taskToken } = await getTask("knowledge")
 console.log('Task:', theTask)
 const theAnswer = await getAnswer(theTask)
 console.log('Answer:', theAnswer)
-const resp = await submitTask(theAnswer, taskToken)
-console.log('Response:', resp)
+//const resp = await submitTask(theAnswer, taskToken)
+//console.log('Response:', resp)
 
 async function getAnswer(theQuestion: string) {
     const verdictRaw = await getOaiAnswer(theTask, systemPromptStep1)
@@ -60,18 +60,16 @@ async function getAnswer(theQuestion: string) {
             //get the currrency at the currency url
             const resp = await fetch(CURRENCY_URL(currency))
             const respText = await resp.json()
+            //@ts-ignore
             theAnswer = respText.rates[0].mid
             //console.log(theQuestion, theAnswer)
         } else {
             const country = code.answer
-            //console.log('Country:', country)
             const resp = await fetch(COUNTRY_URL(country))
             const respJson = await resp.json()
-            //console.log(respJson)
+            //@ts-ignore
             const systemPrompt = systemPromptCountry(respJson)
-            //console.log('system prompt:', systemPrompt)
             theAnswer = await getOaiAnswer(theQuestion, systemPrompt)
-            //console.log(theAnswer)
         }
     }
     return theAnswer
