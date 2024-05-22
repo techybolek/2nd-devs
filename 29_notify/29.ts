@@ -2,9 +2,13 @@ import {HumanMessage, SystemMessage} from "langchain/schema";
 import {ChatOpenAI} from "langchain/chat_models/openai";
 import {getVectorStore} from "./helpers.ts";
 
-const query = "Write a summary of the games by AI_Devs.";
+const query = "Fix the toilet";
+//const query = "Create a new lesson";
+//const query = "Create a new informative youtube video about AI";
+//const query = "Write a summary of the games by AI_Devs.";
 const vectorStore = await getVectorStore();
 const context = await vectorStore.similaritySearchWithScore(query, 2);
+console.log('Vector store returned:', context)
 
 const chat = new ChatOpenAI({ modelName: "gpt-4" });
 const { content: person } = await chat.call([

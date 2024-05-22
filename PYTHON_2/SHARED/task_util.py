@@ -61,10 +61,41 @@ def get_oai_answer(user_prompt, system_prompt = None):
   data = { "model": "gpt-4", "messages": messages }
   
   #response = requests.post(url, data=json.dumps(data), headers=headers)
-  response = requests.post(url, json=data, headers=headers, verify=False)
+  response = requests.post(url, json=data, headers=headers)#,verify=false
   
   # Parse JSON response
   parsed_response = json.loads(response.text)
   resp = parsed_response['choices'][0]['message']['content']
   
+  return resp
+
+def get_oai_answer_from_image(user_prompt, image_url):
+  
+  OAI_URL = "https://api.openai.com/v1/chat/completions"
+  OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+  headers = {"Authorization": "Bearer " + OPENAI_API_KEY}
+  
+  messages=[
+    {
+      "role": "user",
+      "content": [
+        {"type": "text", "text": user_prompt},
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": image_url
+          },
+        },
+      ],
+    }
+  ]
+  
+  data = { "model": "gpt-4o", "messages": messages }
+  
+  response = requests.post(OAI_URL, json=data, headers=headers)
+  
+  parsed_response = json.loads(response.text)
+  #print(parsed_response)
+  resp = parsed_response['choices'][0]['message']['content']
+  print(resp)
   return resp

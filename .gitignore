@@ -174,3 +174,5 @@ qdrant_storage
 bun.lockb
 2nd-devs.code-workspace
 bun.lockb
+PYTHON_2/SHARED/__pycache__
+PYTHON_2/SHARED/__pycache__
