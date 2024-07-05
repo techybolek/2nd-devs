@@ -176,3 +176,4 @@ bun.lockb
 bun.lockb
 PYTHON_2/SHARED/__pycache__
 PYTHON_2/SHARED/__pycache__
+.aider*

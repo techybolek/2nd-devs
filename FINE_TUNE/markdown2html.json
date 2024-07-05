@@ -1,0 +1,129 @@
+    {
+        "role": "user",
+        "content": "# Sample_Heading1\n## Sample_Heading2\n### Sample_Heading3\n**sample_bold_text**\n*sample_italic_text*\n[sample_url_name ](sample_url)\n_sample_underline_text_\nsample_list:\n1. sample_item1\n2. sample_item2\n3. sample_item3"
+    },
+    {
+        "role": "assistant",
+        "content": "<h1>Sample_heading1</h1>\n<h2>Sample_Heading2</h2>\n<h3>Sample_Heading3</h3>\n<span class=\"bold\">sample_bold_text</span>\n<em>sample_italic_text</em>\n<a href=\"sample_url\">sample_url_name</a>\n<u>sample_underline_text</u>\nsample_list:\n<ol>\n<li>sample_item1</li>\n<li>sample_item2</li>\n<li>sample_item3</li>\n</ol>\n"
+    },
+    {
+        "role": "user",
+        "content": "# Sample_Heading1\n"
+    },
+    {
+        "role": "assistant",
+        "content": "<h1>Sample_heading1</h1>"
+    },
+    {
+        "role": "user",
+        "content": "**sample_bold_text**"
+    },
+    {
+        "role": "assistant",
+        "content": "<span class=\"bold\">sample_bold_text</span>"
+    },
+    {
+        "role": "user",
+        "content": "# [sample_url_name ](sample_url)"
+    },
+    {
+        "role": "assistant",
+        "content": "<a href=\"sample_url\">sample_url_name</a>"
+    },
+    {
+        "role": "user",
+        "content": "Oto najważniejsze punkty:\n1. Doskocz\n2. Uderz"
+    },
+    {
+        "role": "assistant",
+        "content": "Oto najważniejsze punkty:\n<ol>\n<li>Doskocz</li>\n<li>Uderz</li>\n</ol>\n"
+    },
+    {
+        "role": "user",
+        "content": "_sampleunderlinetext_"
+    },
+    {
+        "role": "assistant",
+        "content": "<u>sampleunderlinetext</u>"
+    },
+    {
+        "role": "user",
+        "content": "# Nagłówek1\n## Nagłówek2\n### Nagłówek3\n**pogrubiony_tekst**\n*tekst_kursywą*\n[przykładowy_link ](przykładowy_url)\n_podkreślony_tekst_\nlista:\n1. element1\n2. element2\n3. element3"
+    },
+    {
+        "role": "assistant",
+        "content": "<h1>Nagłówek1</h1>\n<h2>Nagłówek2</h2>\n<h3>Nagłówek3</h3>\n<span class=\"bold\">pogrubiony_tekst</span>\n<em>tekst_kursywą</em>\n<a href=\"przykładowy_url\">przykładowy_link</a>\n<u>podkreślony_tekst</u>\nlista:\n<ol>\n<li>element1</li>\n<li>element2</li>\n<li>element3</li>\n</ol>\n"
+    },
+    {
+        "role": "user",
+        "content": "**pogrubiony_tekst**"
+    },
+    {
+        "role": "assistant",
+        "content": "<span class=\"bold\">pogrubiony_tekst</span>"
+    },
+    {
+        "role": "user",
+        "content": "# [przykładowy_link ](przykładowy_url)"
+    },
+    {
+        "role": "assistant",
+        "content": "<a href=\"przykładowy_url\">przykładowy_link</a>"
+    },
+    {
+        "role": "user",
+        "content": "Lista punktów:\n1. Punkt1\n2. Punkt2"
+    },
+    {
+        "role": "assistant",
+        "content": "Lista punktów:\n<ol>\n<li>Punkt1</li>\n<li>Punkt2</li>\n</ol>\n"
+    },
+    {
+        "role": "user",
+        "content": "_podkreślony_tekst_"
+    },
+    {
+        "role": "assistant",
+        "content": "<u>podkreślony_tekst</u>"
+    },
+    {
+        "role": "user",
+        "content": "# Tytuł\n## Podtytuł\n**ważny_tekst**\n*ważny_tekst_kursywą*\n[ważny_link ](ważny_url)\n_podkreślony_tekst_\nLista rzeczy do zrobienia:\n1. Rzecz1\n2. Rzecz2\n3. Rzecz3"
+    },
+    {
+        "role": "assistant",
+        "content": "<h1>Tytuł</h1>\n<h2>Podtytuł</h2>\n<span class=\"bold\">ważny_tekst</span>\n<em>ważny_tekst_kursywą</em>\n<a href=\"ważny_url\">ważny_link</a>\n<u>podkreślony_tekst</u>\nLista rzeczy do zrobienia:\n<ol>\n<li>Rzecz1</li>\n<li>Rzecz2</li>\n<li>Rzecz3</li>\n</ol>\n"
+    },
+    {
+        "role": "user",
+        "content": "**ważny_tekst**"
+    },
+    {
+        "role": "assistant",
+        "content": "<span class=\"bold\">ważny_tekst</span>"
+    },
+    {
+        "role": "user",
+        "content": "# [ważny_link ](ważny_url)"
+    },
+    {
+        "role": "assistant",
+        "content": "<a href=\"ważny_url\">ważny_link</a>"
+    },
+    {
+        "role": "user",
+        "content": "Plan działania:\n1. Krok1\n2. Krok2"
+    },
+    {
+        "role": "assistant",
+        "content": "Plan działania:\n<ol>\n<li>Krok1</li>\n<li>Krok2</li>\n</ol>\n"
+    },
+    {
+        "role": "user",
+        "content": "_tekst_podkreślony_"
+    },
+    {
+        "role": "assistant",
+        "content": "<u>tekst_podkreślony</u>"
+    }
+]

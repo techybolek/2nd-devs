@@ -46,7 +46,7 @@ if __name__ == "__main__":
   get_task(task_name)
 
 
-def get_oai_answer(user_prompt, system_prompt = None):
+def get_oai_answer(user_prompt, system_prompt = None, tools = None):
   
   BASE_URL = "https://api.openai.com/v1/chat/completions"
   OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -57,15 +57,28 @@ def get_oai_answer(user_prompt, system_prompt = None):
   if system_prompt != None:
     messages = [{"role": "system", "content": system_prompt}]
   messages.append({"role": "user", "content": user_prompt})
+ 
+  data = { "model": "gpt-4o", "messages": messages }
   
-  data = { "model": "gpt-4", "messages": messages }
+  if(tools != None):
+    data["tools"] = tools
   
   #response = requests.post(url, data=json.dumps(data), headers=headers)
   response = requests.post(url, json=data, headers=headers)#,verify=false
   
   # Parse JSON response
   parsed_response = json.loads(response.text)
-  resp = parsed_response['choices'][0]['message']['content']
+  resp = {}
+  
+  #check if response contains choices attribute
+  if 'choices' in parsed_response:
+    message = parsed_response['choices'][0]['message']
+    if tools != None:
+      return message
+
+    resp = message['content']
+  else:
+    resp = parsed_response['error']['message']
   
   return resp
 

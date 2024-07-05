@@ -20,12 +20,13 @@ const loader = new PuppeteerWebBaseLoader("https://brain.overment.com", {
 console.log('loader:', loader)
 console.log('Loading...')
 const docs = await loader.load();
-console.log('..loaded')
+console.log('..loaded:', docs)
 
 docs.forEach((doc) => {
     let i = 1;
     const urlToPlaceholder: { [key: string]: string } = {};
 
+    /*
     doc.pageContent = doc.pageContent.replace(/((http|https):\/\/[^\s]+|\.\/[^\s]+)(?=\))/g, (url) => {
         if (!urlToPlaceholder[url]) {
             const placeholder = `$${i++}`;
@@ -34,6 +35,8 @@ docs.forEach((doc) => {
         }
         return urlToPlaceholder[url];
     });
+    */
 });
+console.log(docs.length)
 
-fs.writeFileSync("12_web/docs.json", JSON.stringify(docs, null, 2));
+fs.writeFileSync("12_web/docs_tr.json", JSON.stringify(docs, null, 2));
